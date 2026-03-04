@@ -1,4 +1,4 @@
-import aiosqlite
+import sqlite3
 
 DB_PATH = "bot.db"
 
@@ -30,5 +30,6 @@ async def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         """)
+
 
         await db.commit()
