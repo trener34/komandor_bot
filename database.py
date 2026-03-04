@@ -1,35 +1,35 @@
 import sqlite3
 
-DB_PATH = "bot.db"
+DB_PATH = "data/database.db"
 
-async def init_db():
-    async with aiosqlite.connect(DB_PATH) as db:
-        await db.execute("""
-        CREATE TABLE IF NOT EXISTS players (
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             telegram_id INTEGER UNIQUE,
-            name TEXT
-        );
-        """)
+            username TEXT
+        )
+    """)
 
-        await db.execute("""
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS games (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             date TEXT,
-            status TEXT,
-            chat_id INTEGER,
-            message_id INTEGER
-        );
-        """)
+            is_closed INTEGER DEFAULT 0
+        )
+    """)
 
-        await db.execute("""
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS registrations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             game_id INTEGER,
             user_id INTEGER,
-            status TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-        """)
+            status TEXT
+        )
+    """)
 
-
-        await db.commit()
+    conn.commit()
+    conn.close()
