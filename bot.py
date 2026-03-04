@@ -7,7 +7,7 @@ from handlers import start, admin, game
 from handlers import broadcast
 dp.include_router(broadcast.router)
 async def main():
-    await init_db()
+    init_db()
 
     bot = Bot(BOT_TOKEN)
     dp = Dispatcher()
@@ -19,4 +19,5 @@ async def main():
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
+
     asyncio.run(main())
