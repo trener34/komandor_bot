@@ -1,3 +1,4 @@
+print("NEW DATABASE FILE LOADED")
 import sqlite3
 
 DB_PATH = "data/database.db"
@@ -33,3 +34,4 @@ def init_db():
 
     conn.commit()
     conn.close()
+
