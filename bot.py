@@ -1,4 +1,4 @@
-import asyncio
+import sqlite3
 from aiogram import Bot, Dispatcher
 
 from config import BOT_TOKEN
@@ -18,4 +18,5 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
 
