@@ -1,25 +1,24 @@
 import asyncio
 from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
-from database import init_db
-from handlers import start, admin, game, broadcast
+
+from handlers.start import router as start_router
+from handlers.admin import router as admin_router
+from handlers.game import router as game_router
+from handlers.broadcast import router as broadcast_router
+
 
 async def main():
-    # Инициализация базы данных
-    await init_db()
-
-    # Создаем бот и диспетчер
-    bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
+    bot = Bot(token=BOT_TOKEN)
     dp = Dispatcher()
 
-    # Подключаем роутеры
-    dp.include_router(start.router)
-    dp.include_router(admin.router)
-    dp.include_router(game.router)
-    dp.include_router(broadcast.router)
+    dp.include_router(start_router)
+    dp.include_router(admin_router)
+    dp.include_router(game_router)
+    dp.include_router(broadcast_router)
 
-    # Запускаем бот
     await dp.start_polling(bot)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
