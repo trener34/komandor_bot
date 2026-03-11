@@ -12,4 +12,5 @@ for user in users:
         f"🏐 Игра {date}\nПодтверди участие:",
         reply_markup=confirm_keyboard(game_id)
     )
+
     await asyncio.sleep(0.2)
