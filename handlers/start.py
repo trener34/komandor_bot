@@ -1,15 +1,11 @@
 from aiogram import Router
 from aiogram.types import Message
-from services.game_service import GameService
+from services.broadcast_service import BroadcastService
 
 router = Router()
+broadcast_service = BroadcastService()
 
-@router.message()
-async def start_handler(message: Message):
-    if message.text == "/start":
-        await GameService.register_user(
-            message.from_user.id,
-            message.from_user.full_name
-        )
-        await message.answer("Вы зарегистрированы в системе 🏐")
-
+@router.message(commands=["start"])
+async def cmd_start(message: Message):
+    broadcast_service.subscribe(message.from_user.id)
+    await message.answer(f"Привет, {message.from_user.first_name}! Я работаю 🚀")
