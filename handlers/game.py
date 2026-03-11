@@ -1,16 +1,13 @@
 from aiogram import Router
 from aiogram.types import Message
-from services.game_service import GameService
+from aiogram.filters import Command
 
 router = Router()
-game_service = GameService()
 
-@router.message(commands=["startgame"])
+@router.message(Command("game"))
 async def start_game(message: Message):
-    text = game_service.start_game(message.from_user.id)
-    await message.answer(text)
 
-@router.message(commands=["endgame"])
-async def end_game(message: Message):
-    text = game_service.end_game(message.from_user.id)
-    await message.answer(text)
+    await message.answer(
+        "🎮 Игра началась!\n\n"
+        "Скоро здесь будет игровая логика."
+    )
