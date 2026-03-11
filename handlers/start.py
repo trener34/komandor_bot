@@ -12,3 +12,4 @@ async def start_handler(message: Message):
             message.from_user.full_name
         )
         await message.answer("Вы зарегистрированы в системе 🏐")
+
