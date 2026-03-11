@@ -4,10 +4,18 @@ from aiogram.filters import Command
 
 router = Router()
 
-@router.message(Command("game"))
-async def start_game(message: Message):
+
+@router.message(Command("new_game"))
+async def new_game(message: Message):
 
     await message.answer(
-        "🎮 Игра началась!\n\n"
-        "Скоро здесь будет игровая логика."
+        "🎮 Новая игра создана!"
+    )
+
+
+@router.message(Command("upload_list"))
+async def upload_list(message: Message):
+
+    await message.answer(
+        "📂 Загрузка списка игроков."
     )
